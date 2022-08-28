@@ -14,15 +14,22 @@
     <?php 
     include_once("menu.php"); 
     include_once("muestraErrores.php");
-    
+    include_once("muestraTablas.php");
     if (isset($_GET['error']) ) {
 		$muestraErrores = new muestraErrores($_GET['error']);
 	}
+    $placa = '';
+    $fecha_consulta = '';
+    if (isset($_POST["placa"]) || isset($_POST["fecha_consulta"])) {
+        $placa = $_POST["placa"];
+        $fecha_consulta = $_POST["fecha_consulta"];
+
+    }
     ?>
     
     <div class="contenedor">
         <h2 class="text-center">Registro de parqueo</h2>
-        <form action="prcRegistroParqueo.php" method="post">
+        <form action="conRegistroParqueo.php" method="post">
             <div class="mb-3">
                 <label for="fecha_consulta" class="form-label">Fecha</label>
                 <input type="date" name="fecha_consulta" id="fecha_consulta" class="form-control">
@@ -37,20 +44,8 @@
             </div>
         </form>
 
-        <table class="table table-striped">
-            <thead>
-                <th>Placa</th>
-                <th>Fecha y hora de entrada</th>
-                <th>Usuario Entrada</th>
-                <th>Fecha y hora de salida</th>
-                <th>Usuario salida</th>
-                <th>Horas de parqueo</th>
-                <th>Monto Tarifa</th>
-                <th>Descuento</th>
-                <th>Monto a pagar</th>
-            </thead>
-            
-        </table>
+        <?php $tabla = new muestraTablas($fecha_consulta,$placa); ?>
+        
     </div>
     <script type="text/javascript" src="js/validaForms.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>

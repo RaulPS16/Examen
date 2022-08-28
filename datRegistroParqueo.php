@@ -35,19 +35,18 @@
             }
         }
 
-        public function consultaLista($pIndice = 0, $pResultadoPorPagina, $pValores = NULL){
+        public function consultaLista($pFecha = '', $pPlaca = ''){
             try {
                 $sql = "SELECT * FROM registro_parqueo WHERE 1=1 ";
-                if ($pValores <> NULL) {
-                    if (isset($pValores['fecha'])) {
-                        $sql .= " AND fecha_entrada = '{$pValores['fecha']}'";
-                    }
-                    if (isset($pValores['placa'])) {
-                        $sql .= " AND placa = '{$pValores['placa']}'";
-                    }
+                
+                if ($pFecha <> '') {
+                    $sql .= " AND fecha_entrada = '{$pFecha}'";
                 }
-                $sql .= " ORDER BY fecha_entrada, hora_entrada DESC
-                LIMIT {$pIndice}, {$pResultadoPorPagina};";
+                if ($pPlaca <> '') {
+                    $sql .= " AND placa = '{$pPlaca}'";
+                }
+                
+                $sql .= " ORDER BY fecha_entrada, hora_entrada DESC;";
                 return parent::Consultar($sql);
             } catch (Exeption $th) {
                 throw new Exception("Error en metodo consultar lista " . $th->getMessage);
