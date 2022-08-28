@@ -22,6 +22,10 @@
                     <a class="nav-link" href="conRegistroParqueo.php">Consulta de registro de parqueo</a>
                 </li>
             </ul>
+            
         </div>
+        <ul class="navbar-nav derecha">
+                <li  class="nav-item"><a class="nav-link" href="desconectar.php">Desconectar</a></li>
+            </ul>
     </div>
 </nav>
