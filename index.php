@@ -11,9 +11,8 @@
     <title>Login Parqueo</title>
 </head>
 <body>
-    
     <div class="contenedor">
-        <h1>Sistema de registro para parqueo</h1>
+        <h1 class="text-center">Sistema de registro para parqueo</h1>
         <form action="validaLogin.php" method="post" class="form-login">
             <div class=""> 
                 <label for="id_usuario" class="form-label">Usuario</label>

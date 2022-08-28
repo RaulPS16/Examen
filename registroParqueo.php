@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,7 +15,7 @@
     
     <div class="contenedor">
         <h2 class="text-center">Registro de parqueo</h2>
-        <form action="prcRegistroParqueo.php" method="post" class="needs-validation" novalidate>
+        <form action="prcRegistroParqueo.php" method="get" class="needs-validation" novalidate>
             <div class="mb-3">
                 <label for="placa" class="form-label">Nombre del usuario</label>
                 <input type="text" name="placa" id="placa" class="form-control" required>
@@ -29,7 +29,7 @@
                 <label for="fecha_entrada" class="form-label">Fecha y hora de entrada</label>
                 <div class="input-group">
                     <input type="date" name="fecha_entrada" id="fecha_entrada" class="form-control">
-                    <input type="time" name="hora_entrada" id="hora_entrada" class="form-control">
+                    <input type="time" name="hora_entrada" id="hora_entrada" class="form-control" step="1">
                 </div>
             </div>
             <div class="mb-3">
@@ -40,7 +40,7 @@
                 <label for="fecha_entrada" class="form-label">Fecha y hora de salida</label>
                 <div class="input-group">
                     <input type="date" name="fecha_entrada" id="fecha_entrada" class="form-control">
-                    <input type="time" name="hora_entrada" id="hora_entrada" class="form-control">
+                    <input type="time" name="hora_entrada" id="hora_entrada" class="form-control" step="1">
                 </div>
             </div>
             <div class="mb-3">
@@ -73,10 +73,9 @@
                 </div>
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <input type="submit" value="Consultar" class="btn btn-primary" name="btnConsultar">
-                <input type="submit" value="Insertar" class="btn btn-secondary" name="btnInsertar">
-                <input type="submit" value="Modificar" class="btn btn-warning" name="btnModificar">
-                <input type="submit" value="Eliminar" class="btn btn-danger" name="btnEliminar">
+                <input type="submit" value="Ingreso" class="btn btn-primary" name="btnIngreso">
+                <input type="submit" value="Calcular monto" class="btn btn-warning" name="btnCalculaMonto">
+                <input type="submit" value="Salida" class="btn btn-secondary" name="btnSalida">
             </div>
         </form>
     </div>
