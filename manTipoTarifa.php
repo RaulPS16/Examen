@@ -14,7 +14,11 @@
     <?php 
     include_once("menu.php"); 
     include_once("muestraErrores.php");
-    
+    $retornaDatos = array(array("descripcion" => "",
+    "monto_tarifa" => ""));
+    if (isset($_GET['datosConsulta'])) {
+        $retornaDatos = unserialize($_GET['datosConsulta']);
+    }
     if (isset($_GET['error']) ) {
 		$muestraErrores = new muestraErrores($_GET['error']);
 	}
@@ -24,18 +28,18 @@
         <h2 class="text-center">Mantenimiento de tipo tarifa</h2>
         <form action="prcManTipoTarifa.php" method="post">
             <div class="mb-3">
-                <label for="descripcion_tarifa" class="form-label">Descripcion</label>
-                <input type="text" name="descripcion_tarifa" id="descripcion_tarifa" class="form-control">
+                <label for="descripcion" class="form-label">Descripcion</label>
+                <input type="text" name="descripcion" id="descripcion" class="form-control" value="<?php print_r($retornaDatos[0]['descripcion']);?>">
             </div>
             <div class="mb-3">
                 <label for="monto_tarifa" class="form-label">Monto tarifa</label>
-                <input type="number" name="monto_tarifa" id="monto_tarifa" class="form-control">
+                <input type="number" name="monto_tarifa" id="monto_tarifa" class="form-control" value="<?php print_r($retornaDatos[0]['monto_tarifa']);?>">
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <input type="submit" value="Consultar" class="btn btn-primary" name="btnConsultar">
-                <input type="submit" value="Insertar" class="btn btn-secondary" name="btnInsertar">
-                <input type="submit" value="Modificar" class="btn btn-warning" name="btnModificar">
-                <input type="submit" value="Eliminar" class="btn btn-danger" name="btnEliminar">
+                <input type="submit" value="Consultar" class="btn btn-primary" name="btnManTipoTarifa">
+                <input type="submit" value="Insertar" class="btn btn-secondary" name="btnManTipoTarifa">
+                <input type="submit" value="Modificar" class="btn btn-warning" name="btnManTipoTarifa">
+                <input type="submit" value="Eliminar" class="btn btn-danger" name="btnManTipoTarifa">
             </div>
         </form>
     </div>

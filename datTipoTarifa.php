@@ -19,7 +19,7 @@
 
         public function modificar($pValores){
             try {
-                $sql = "UPDATE tipo_tarifa SET descripcion = '{$pValores['descripcion']}', monto_tarifa =  {$pValores['monto_tarifa']} WHERE id = {$pValores['id']};";
+                $sql = "UPDATE tipo_tarifa SET descripcion = '{$pValores['descripcion']}', monto_tarifa =  {$pValores['monto_tarifa']} WHERE descripcion = '{$pValores['descripcion']}';";
                 parent::ejecutar($sql);
             } catch (Exeption $th) {
                 throw new Exception("Error en metodo modificar " . $th->getMessage);
@@ -28,7 +28,7 @@
 
         public function eliminar($pValores){
             try {
-                $sql = "DELETE FROM tipo_tarifa WHERE id = {$pValores['id']};";
+                $sql = "DELETE FROM tipo_tarifa WHERE descripcion = '{$pValores['descripcion']}';";
                 parent::ejecutar($sql);
             } catch (Exeption $th) {
                 throw new Exception("Error en metodo eliminar " . $th->getMessage);
@@ -37,7 +37,7 @@
 
         public function consultarTipoTarifa($pValores){
             try {
-                $sql = "SELECT * FROM tipo_tarifa WHERE id = {$pValores['id']};";
+                $sql = "SELECT *, COUNT(*) AS contador FROM tipo_tarifa WHERE descripcion = '{$pValores['descripcion']}';";
                 return parent::Consultar($sql);;
             } catch (Exeption $th) {
                 throw new Exception("Error en metodo consultar " . $th->getMessage);
