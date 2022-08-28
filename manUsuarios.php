@@ -11,28 +11,47 @@
     <title>Mantenimiento de usuarios</title>
 </head>
 <body>
-    <?php include_once("menu.php"); ?>
+    <?php 
+    include_once("menu.php"); 
+    $retornaDatos = array(array("id_usuario" => "",
+    "clave" => "",
+    "indi_admin" => 0));
+    if (isset($_GET['datosConsulta'])) {
+        $retornaDatos = unserialize($_GET['datosConsulta']);
+    }
+    
+    ?>
     
     <div class="contenedor">
         <h2 class="text-center">Mantenimiento de usuarios</h2>
         <form action="prcManUsuarios.php" method="post">
             <div class="mb-3">
-                <label for="nombre_usuario" class="form-label">Nombre del usuario</label>
-                <input type="text" name="nombre_usuario" id="nombre_usuario" class="form-control">
+                <label for="id_usuario" class="form-label">Nombre del usuario</label>
+                <input type="text" name="id_usuario" id="id_usuario" class="form-control" value="<?php print_r($retornaDatos[0]['id_usuario']);?>" placeholder="Nombre">
             </div>
             <div class="mb-3">
                 <label for="clave" class="form-label">Contraseña</label>
-                <input type="password" name="clave" id="clave" class="form-control">
+                <input type="password" name="clave" id="clave" class="form-control" value="<?php print_r($retornaDatos[0]['clave']);?>">
             </div>
             <div class="mb-3 form-chek form-switch">
-                <input type="checkbox" name="indi_admin" id="indi_admin" class="form-check-input" rol="switch">
+                <?php
+                    if ($retornaDatos[0]["indi_admin"] == 1) {
+                        ?>
+                        <input type="checkbox" name="indi_admin" id="indi_admin" class="form-check-input" rol="switch" checked>
+                        <?php
+                    }else {
+                        ?>
+                        <input type="checkbox" name="indi_admin" id="indi_admin" class="form-check-input" rol="switch">
+                        <?php
+                    }
+                ?>
                 <label for="indi_admin" class="form-check-label">Inidicador de administrador</label>
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <input type="submit" value="Consultar" class="btn btn-primary" name="btnConsultar">
-                <input type="submit" value="Insertar" class="btn btn-secondary" name="btnInsertar">
-                <input type="submit" value="Modificar" class="btn btn-warning" name="btnModificar">
-                <input type="submit" value="Eliminar" class="btn btn-danger" name="btnEliminar">
+                <input type="submit" value="Consultar" class="btn btn-primary" name="btnManUsuarios">
+                <input type="submit" value="Insertar" class="btn btn-secondary" name="btnManUsuarios">
+                <input type="submit" value="Modificar" class="btn btn-warning" name="btnManUsuarios">
+                <input type="submit" value="Eliminar" class="btn btn-danger" name="btnManUsuarios">
             </div>
         </form>
     </div>

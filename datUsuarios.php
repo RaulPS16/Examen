@@ -19,7 +19,7 @@
 
         public function modificar($pValores){
             try {
-                $sql = "UPDATE usuarios SET id_usuario = '{$pValores['id_usuario']}', clave =  '{$pValores['clave']}', indi_admin = {$pValores['indi_admin']} WHERE id = {$pValores['id']};";
+                $sql = "UPDATE usuarios SET id_usuario = '{$pValores['id_usuario']}', clave =  '{$pValores['clave']}', indi_admin = {$pValores['indi_admin']} WHERE id_usuario = '{$pValores['id_usuario']}';";
                 parent::ejecutar($sql);
             } catch (Exeption $th) {
                 throw new Exception("Error en metodo modificar " . $th->getMessage);
@@ -28,7 +28,7 @@
 
         public function eliminar($pValores){
             try {
-                $sql = "DELETE FROM usuarios WHERE id = {$pValores['id']};";
+                $sql = "DELETE FROM usuarios WHERE id_usuario = '{$pValores['id_usuario']}';";
                 parent::ejecutar($sql);
             } catch (Exeption $th) {
                 throw new Exception("Error en metodo eliminar " . $th->getMessage);
@@ -37,8 +37,8 @@
 
         public function consultaUsuario($pValores){
             try {
-                $sql = "SELECT * FROM usuarios WHERE id = {$pValores['id']};";
-                return parent::Consultar($sql);;
+                $sql = "SELECT *, count(*) AS contador FROM usuarios WHERE id_usuario = '{$pValores['id_usuario']}' AND clave = '{$pValores['clave']}';";
+                return parent::Consultar($sql);
             } catch (Exeption $th) {
                 throw new Exception("Error en metodo consultar " . $th->getMessage);
             }
@@ -47,6 +47,15 @@
         public function consultaLista(){
             try {
                 $sql = "SELECT * FROM usuarios;";
+                return parent::Consultar($sql);
+            } catch (Exeption $th) {
+                throw new Exception("Error en metodo consulta Lista " . $th->getMessage);
+            }
+        }
+
+        public function consultaManUsuario($pValores){
+            try {
+                $sql = "SELECT *, count(*) AS contador FROM usuarios WHERE id_usuario = '{$pValores['id_usuario']}'";
                 return parent::Consultar($sql);
             } catch (Exeption $th) {
                 throw new Exception("Error en metodo consulta Lista " . $th->getMessage);

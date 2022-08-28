@@ -13,7 +13,7 @@
 <body>
     <div class="contenedor">
         <h1 class="text-center">Sistema de registro para parqueo</h1>
-        <form action="validaLogin.php" method="post" class="form-login">
+        <form action="loginControl.php" method="post" class="form-login">
             <div class=""> 
                 <label for="id_usuario" class="form-label">Usuario</label>
                 <input type="text" name="id_usuario" id="id_usuario" class="form-control">
