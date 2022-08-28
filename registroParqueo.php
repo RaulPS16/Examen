@@ -14,61 +14,48 @@
     <?php 
     include_once("menu.php"); 
     include_once("muestraErrores.php");
-    
+    include_once("prcSelect.php");
+
+    $retornaDatos = array("descripcion_tarifa" => "",
+    "tarifa" => "",
+    "descuento" => "",
+    "descuento" => "",
+    "placa" => "",
+    "horas_parqueo" => "",
+    "monto_pagar" => "");
+
     if (isset($_GET['error']) ) {
 		$muestraErrores = new muestraErrores($_GET['error']);
 	}
+
+    if (isset($_GET['datosConsulta'])) {
+        $retornaDatos = unserialize($_GET['datosConsulta']);
+    }
     ?>
     
     <div class="contenedor">
         <h2 class="text-center">Registro de parqueo</h2>
         <form action="prcRegistroParqueo.php" method="post" class="needs-validation" novalidate>
             <div class="mb-3">
-                <label for="placa" class="form-label">Nombre del usuario</label>
-                <input type="text" name="placa" id="placa" class="form-control" required>
+                <label for="placa" class="form-label">Numero de Placa</label>
+                <input type="text" name="placa" id="placa" class="form-control" value="<?php print_r($retornaDatos["placa"]); ?>" required>
                 <div class="invalid-feedback">Ingrese una placa</div>
             </div>
             <div class="mb-3">
-                <label for="usuario_entrada" class="form-label">Usuario Entrada</label>
-                <input type="text" name="usuario_entrada" id="usuario_entrada" class="form-control">
-            </div>
-            <div class="mb-3">
-                <label for="fecha_entrada" class="form-label">Fecha y hora de entrada</label>
-                <div class="input-group">
-                    <input type="date" name="fecha_entrada" id="fecha_entrada" class="form-control">
-                    <input type="time" name="hora_entrada" id="hora_entrada" class="form-control" step="1">
-                </div>
-            </div>
-            <div class="mb-3">
-                <label for="usuario_salida" class="form-label">Usuario Salida</label>
-                <input type="text" name="usuario_salida" id="usuario_salida" class="form-control">
-            </div>
-            <div class="mb-3">
-                <label for="fecha_entrada" class="form-label">Fecha y hora de salida</label>
-                <div class="input-group">
-                    <input type="date" name="fecha_entrada" id="fecha_entrada" class="form-control">
-                    <input type="time" name="hora_entrada" id="hora_entrada" class="form-control" step="1">
-                </div>
-            </div>
-            <div class="mb-3">
                 <label for="horas_parqueo" class="form-label">Horas Parqueo</label>
-                <input type="number" name="horas_parqueo" id="horas_parqueo" class="form-control">
+                <input type="text" name="horas_parqueo" id="horas_parqueo" class="form-control" value="<?php print_r($retornaDatos["horas_parqueo"]); ?>">
             </div>
             <div class="mb-3">
                 <label for="monto_tarifa" class="form-label">Monto Tarifa</label>
                 <div class="input-group">
                     <spam class="input-group-text" id="basic-addon">₡</spam>
-                    <select class="form-select" name="monto_tarifa" id="monto_tarifa" aria-describedby="basic-addon">
-                        <option value=""></option>
-                    </select>
+                    <?php $tarifa = new selectTarifas($retornaDatos["tarifa"]); ?>
                 </div>
             </div>
             <div class="mb-3">
                 <label for="descuento" class="form-label">Descuento</label>
                 <div class="input-group">
-                    <select class="form-select" name="descuento" id="descuento" aria-describedby="basic-addon2">
-                            <option value=""></option>
-                        </select>
+                    <?php $descuento = new selectDescuentos($retornaDatos["descuento"]); ?>
                     <spam class="input-group-text" id="basic-addon2">%</spam>
                 </div>
             </div>
@@ -76,13 +63,13 @@
                 <label for="monto_pagar" class="form-label">Monto a pagar</label>
                 <div class="input-group">
                     <spam class="input-group-text" id="basic-addon">₡</spam>
-                    <input type="number" name="monto_pagar" id="monto_pagar" class="form-control" aria-describedby="basic-addon">
+                    <input type="text" name="monto_pagar" id="monto_pagar" class="form-control" aria-describedby="basic-addon" value="<?php print_r($retornaDatos["monto_pagar"]); ?>">
                 </div>
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <input type="submit" value="Ingreso" class="btn btn-primary" name="btnIngreso">
-                <input type="submit" value="Calcular monto" class="btn btn-warning" name="btnCalculaMonto">
-                <input type="submit" value="Salida" class="btn btn-secondary" name="btnSalida">
+                <input type="submit" value="Ingreso" class="btn btn-primary" name="btnRegistroParqueo">
+                <input type="submit" value="Calcular monto" class="btn btn-warning" name="btnRegistroParqueo">
+                <input type="submit" value="Salida" class="btn btn-secondary" name="btnRegistroParqueo">
             </div>
         </form>
     </div>

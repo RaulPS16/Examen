@@ -44,9 +44,13 @@
             }
         }
 
-        public function consultaLista(){
+        public function consultaLista($pValores = ''){
             try {
-                $sql = "SELECT * FROM descuentos;";
+                if ($pValores <> '') {
+                    $sql ="SELECT *, IF(descripcion = '{$pValores}',1,2) AS 'orden' FROM descuentos ORDER BY orden, descripcion ASC;";
+                }else {
+                    $sql = "SELECT * FROM descuentos;";
+                }
                 return parent::Consultar($sql);
             } catch (Exeption $th) {
                 throw new Exception("Error en metodo consultar lista " . $th->getMessage);

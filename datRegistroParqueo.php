@@ -17,9 +17,9 @@
             
         }
 
-        public function modificar($pValores){
+        public function modificarSalida($pValores){
             try {
-                $sql = "UPDATE registro_parqueo SET usuario_salida = '{$pValores['usuario_salida']}', fecha_salida = '{$pValores['fecha_salida']}', hora_salida = '{$pValores['hora_salida']}', horas_parqueo = '{$pValores['horas_parqueo']}', monto_tarifa = {$pValores['monto_tarifa']}, descuento = {$pValores['descuento']}, monto_pagar = {$pValores['monto_pagar']} WHERE placa = '{$pValores['placa']}';";
+                $sql = "UPDATE registro_parqueo SET usuario_salida = '{$pValores['usuario_salida']}', fecha_salida = '{$pValores['fecha_salida']}', hora_salida = '{$pValores['hora_salida']}', horas_parqueo = '{$pValores['horas_parqueo']}', monto_tarifa = {$pValores['monto_tarifa']}, descuento = {$pValores['monto_descuento']}, monto_pagar = {$pValores['monto_pagar']} WHERE placa = '{$pValores['placa']}';";
                 parent::ejecutar($sql);
             } catch (Exeption $th) {
                 throw new Exception("Error en metodo modificar " . $th->getMessage);
@@ -62,6 +62,33 @@
                 throw new Exception("Error en metodo consultar lista " . $th->getMessage);
             }
         }
+
+        public function consultaPlaca($pPlaca){
+            try {
+                $sql = "SELECT *, count(*) AS contador FROM registro_parqueo WHERE placa = '{$pPlaca}';";
+                return parent::Consultar($sql);
+            } catch (Exeption $th) {
+                throw new Exception("Error en metodo consultar placa " . $th->getMessage);
+            }
+        }
+
+        public function consultaDescuentoTarifa($pValores){
+            try {
+                $sql = "SELECT descuentos.descripcion AS 'descripcion_descuento', 
+                descuentos.descuento AS 'monto_descuento', 
+                tipo_tarifa.descripcion AS 'descripcion_tarifa', 
+                tipo_tarifa.monto_tarifa AS 'monto_tarifa', 
+                COUNT(*) AS contador 
+                FROM `descuentos` INNER JOIN tipo_tarifa 
+                ON 1=1 
+                WHERE descuentos.descripcion = '{$pValores["descuento"]}' 
+                AND tipo_tarifa.descripcion = '{$pValores["tarifa"]}';";
+                return parent::Consultar($sql);
+            } catch (Exeption $th) {
+                throw new Exception("Error en metodo consultaDescuentoTarifa " . $th->getMessage);
+            }
+        }
+
     }
     /*$valores = array("placa" => "BCC321",
     "usuario_entrada" => "Rodrigo",

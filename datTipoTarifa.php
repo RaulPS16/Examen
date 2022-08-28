@@ -44,19 +44,23 @@
             }
         }
 
-        public function consultaLista(){
+        public function consultaLista($pValores = ''){
             try {
-                $sql = "SELECT * FROM tipo_tarifa;";
+                if ($pValores <> '') {
+                    $sql ="SELECT *, IF(descripcion = '{$pValores}',1,2) AS 'orden' FROM tipo_tarifa ORDER BY orden, descripcion ASC;";
+                }else{
+                    $sql = "SELECT * FROM tipo_tarifa;";
+                }
                 return parent::Consultar($sql);
             } catch (Exeption $th) {
                 throw new Exception("Error en metodo consultar lista " . $th->getMessage);
             }
         }
     }
-    $valores = array("descripcion" => 'modifica tarifa',
+    /*$valores = array("descripcion" => 'modifica tarifa',
     "monto_tarifa" => "1020495",
-    "id" => 2);
-    $datTipoTarifa = new datTipoTarifa();
+    "id" => 2);*/
+    //$datTipoTarifa = new datTipoTarifa();
     //$datTipoTarifa->insertar($valores);
     //$datTipoTarifa->modificar($valores);
     //$datTipoTarifa->eliminar($valores);
