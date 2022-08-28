@@ -13,12 +13,16 @@
 <body>
     <?php 
     include_once("menu.php"); 
+    include_once("muestraErrores.php");
     $retornaDatos = array(array("id_usuario" => "",
     "clave" => "",
     "indi_admin" => 0));
     if (isset($_GET['datosConsulta'])) {
         $retornaDatos = unserialize($_GET['datosConsulta']);
     }
+    if (isset($_GET['error']) ) {
+		$muestraErrores = new muestraErrores($_GET['error']);
+	}
     
     ?>
     

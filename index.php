@@ -11,6 +11,14 @@
     <title>Login Parqueo</title>
 </head>
 <body>
+    <?php
+    
+    include_once("muestraErrores.php");
+    
+    if (isset($_GET['error']) ) {
+		$muestraErrores = new muestraErrores($_GET['error']);
+	}
+    ?>
     <div class="contenedor">
         <h1 class="text-center">Sistema de registro para parqueo</h1>
         <form action="loginControl.php" method="post" class="form-login">

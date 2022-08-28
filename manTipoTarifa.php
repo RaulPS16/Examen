@@ -11,7 +11,14 @@
     <title>Mantenimiento de tipo tarifa</title>
 </head>
 <body>
-    <?php include_once("menu.php"); ?>
+    <?php 
+    include_once("menu.php"); 
+    include_once("muestraErrores.php");
+    
+    if (isset($_GET['error']) ) {
+		$muestraErrores = new muestraErrores($_GET['error']);
+	}
+    ?>
     
     <div class="contenedor">
         <h2 class="text-center">Mantenimiento de tipo tarifa</h2>
