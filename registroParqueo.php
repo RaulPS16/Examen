@@ -15,7 +15,7 @@
     
     <div class="contenedor">
         <h2 class="text-center">Registro de parqueo</h2>
-        <form action="prcRegistroParqueo.php" method="get" class="needs-validation" novalidate>
+        <form action="prcRegistroParqueo.php" method="post" class="needs-validation" novalidate>
             <div class="mb-3">
                 <label for="placa" class="form-label">Nombre del usuario</label>
                 <input type="text" name="placa" id="placa" class="form-control" required>
