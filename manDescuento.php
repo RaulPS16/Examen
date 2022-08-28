@@ -15,30 +15,36 @@
     include_once("menu.php"); 
     include_once("muestraErrores.php");
     
+    $retornaDatos = array(array("descripcion" => "",
+    "descuento" => ""));
+
     if (isset($_GET['error']) ) {
 		$muestraErrores = new muestraErrores($_GET['error']);
 	}
+    if (isset($_GET['datosConsulta'])) {
+        $retornaDatos = unserialize($_GET['datosConsulta']);
+    }
     ?>
     
     <div class="contenedor">
         <h2 class="text-center">Mantenimiento de descuentos</h2>
-        <form action="prcManUsuarios.php" method="post">
+        <form action="prcManDescuento.php" method="post">
             <div class="mb-3">
-                <label for="descripcion_descuento" class="form-label">Descripcion</label>
-                <input type="text" name="descripcion_descuento" id="descripcion_descuento" class="form-control">
+                <label for="descripcion" class="form-label">Descripcion</label>
+                <input type="text" name="descripcion" id="descripcion" class="form-control" value="<?php print_r($retornaDatos[0]["descripcion"]);?>">
             </div>
             <div class="mb-3">
                 <label for="descuento" class="form-label">Descuento</label>
                 <div class="input-group">
-                    <input type="number" name="descuento" id="descuento" class="form-control" aria-describedby="basic-addon">
+                    <input type="number" name="descuento" id="descuento" class="form-control" aria-describedby="basic-addon" step="0.01" value="<?php print_r($retornaDatos[0]["descuento"]);?>">
                     <spam class="input-group-text" id="basic-addon">%</spam>
                 </div>
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <input type="submit" value="Consultar" class="btn btn-primary" name="btnConsultar">
-                <input type="submit" value="Insertar" class="btn btn-secondary" name="btnInsertar">
-                <input type="submit" value="Modificar" class="btn btn-warning" name="btnModificar">
-                <input type="submit" value="Eliminar" class="btn btn-danger" name="btnEliminar">
+                <input type="submit" value="Consultar" class="btn btn-primary" name="btnManDescuento">
+                <input type="submit" value="Insertar" class="btn btn-secondary" name="btnManDescuento">
+                <input type="submit" value="Modificar" class="btn btn-warning" name="btnManDescuento">
+                <input type="submit" value="Eliminar" class="btn btn-danger" name="btnManDescuento">
             </div>
         </form>
     </div>

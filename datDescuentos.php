@@ -1,7 +1,7 @@
 <?php
     include_once("ConexionDB.php");
 
-    class datDescruentos extends ConexionDB{
+    class datDescuentos extends ConexionDB{
         
         public function __construct(){
             parent::__construct();
@@ -19,7 +19,7 @@
 
         public function modificar($pValores){
             try {
-                $sql = "UPDATE descuentos SET descripcion = '{$pValores['descripcion']}', descuento =  {$pValores['descuento']} WHERE id = {$pValores['id']};";
+                $sql = "UPDATE descuentos SET descripcion = '{$pValores['descripcion']}', descuento =  {$pValores['descuento']} WHERE descripcion = '{$pValores['descripcion']}';";
                 parent::ejecutar($sql);
             } catch (Exeption $th) {
                 throw new Exception("Error en metodo modificar " . $th->getMessage);
@@ -28,7 +28,7 @@
 
         public function eliminar($pValores){
             try {
-                $sql = "DELETE FROM descuentos WHERE id = {$pValores['id']};";
+                $sql = "DELETE FROM descuentos WHERE descripcion = '{$pValores['descripcion']}';";
                 parent::ejecutar($sql);
             } catch (Exeption $th) {
                 throw new Exception("Error en metodo eliminar " . $th->getMessage);
@@ -37,7 +37,7 @@
 
         public function consultarDescuentos($pValores){
             try {
-                $sql = "SELECT * FROM descuentos WHERE id = {$pValores['id']};";
+                $sql = "SELECT *, COUNT(*) AS contador FROM descuentos WHERE descripcion = '{$pValores['descripcion']}';";
                 return parent::Consultar($sql);;
             } catch (Exeption $th) {
                 throw new Exception("Error en metodo consultar " . $th->getMessage);
@@ -53,10 +53,10 @@
             }
         }
     }
-    $valores = array("descripcion" => 'Prueba 1',
+    /*$valores = array("descripcion" => "",
     "descuento" => "50.00",
-    "id" => 2);
-    $datDescruentos = new datDescruentos();
+    "btnManDescuento" => 2);*/
+    //$datDescruentos = new datDescuentos();
     //$datDescruentos->insertar($valores);
     //$datDescruentos->modificar($valores);
     //$datDescruentos->eliminar($valores);
