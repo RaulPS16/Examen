@@ -1,4 +1,7 @@
 <?php
+    session_start();
+?>
+<?php
 
     include_once("datRegistroParqueo.php");
 
@@ -28,7 +31,7 @@
                     header("Location: registroParqueo.php?error=4");
                     exit;
                 }
-                $pValoresPantalla["usuario_entrada"] = "604320137";
+                $pValoresPantalla["usuario_entrada"] = $_SESSION['sId_Usuario'];
                 $pValoresPantalla["fecha_entrada"] = date("Y-m-d");
                 $pValoresPantalla["hora_entrada"] = date("H:i:s");
 
@@ -63,7 +66,7 @@
                     header("Location: registroParqueo.php?error=2");
                     exit;
                 }
-                $pValoresPantalla["usuario_salida"] = "604320137";
+                $pValoresPantalla["usuario_salida"] = $_SESSION['sId_Usuario'];
                 $pValoresPantalla["fecha_salida"] = date("Y-m-d");
                 $pValoresPantalla["hora_salida"] = date("H:i:s");
 

@@ -1,3 +1,8 @@
+<?php
+    session_start();
+    include_once("loginControl.php");
+    $login = new loginControl();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

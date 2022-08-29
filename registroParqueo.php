@@ -1,3 +1,8 @@
+<?php
+    session_start();
+    include_once("loginControl.php");
+    $login = new loginControl();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -32,7 +37,6 @@
         $retornaDatos = unserialize($_GET['datosConsulta']);
     }
     ?>
-    
     <div class="contenedor">
         <h2 class="text-center">Registro de parqueo</h2>
         <form action="prcRegistroParqueo.php" method="post" class="needs-validation" novalidate>
